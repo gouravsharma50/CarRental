@@ -1,0 +1,51 @@
+﻿@page "/vehicles/"
+
+<h3 class="cart-title">Car Vehicles</h3>
+<hr />
+<a href="/vehicles/create/" class="btn btn-primary"><span class="oi oi-plus"></span> Create New Vehicle</a>
+@if (lst == null)
+{
+    <div class="alert alert-info">Loading...</div>
+}
+else
+{
+    <table class="table table-responsive-sm">
+        <thead>
+            <tr>
+                <th>Modal</th>
+                <th>Make</th>
+                <th>Colour</th>
+                <th>Vin</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in lst)
+            {
+                <tr>
+                    <td>@item.Model.Name</td>
+                    <td>@item.Make.Name</td>
+                    <td>@item.Color.Name</td>
+                    <td>@item.Vin</td>
+                    <td>
+                        <a href="/vehicles/view/@item.Id" class="btn btn-primary">
+                            <span class="oi oi-book"></span>
+                        </a>
+                        <a href="/vehicles/edit/@item.Id" class="btn btn-warning">
+                            <span class="oi oi-pencil"></span>
+                        </a>
+                        <button class="btn btn-danger" onclick="@(()=>Delete(item.Id))">
+                            <span class="oi oi-delete"></span>
+                        </button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+
+}
+
+@code {
+
+}

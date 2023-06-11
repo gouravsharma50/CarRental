@@ -14,7 +14,7 @@ using CarRentalManagement.Client;
 namespace CarRentalManagement.Server.Controllers
 {
     //[Authorize]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     [ApiController]
     public class MakesController : ControllerBase
     {
