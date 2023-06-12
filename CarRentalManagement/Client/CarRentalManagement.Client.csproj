@@ -28,6 +28,7 @@
     <Folder Include="Pages\Colours\" />
     <Folder Include="Pages\Customers\" />
     <Folder Include="Pages\Bookings\" />
+    <Folder Include="wwwroot\Scripts\" />
   </ItemGroup>
 
 </Project>

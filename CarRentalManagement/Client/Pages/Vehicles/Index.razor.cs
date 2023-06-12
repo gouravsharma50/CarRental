@@ -21,7 +21,10 @@ namespace CarRentalManagement.Client.Pages.Vehicles
             _interceptor.MonitorEvent();
             lst = await _client.GetFromJsonAsync<List<Vehicle>>($"{Endpoints.VehiclesEndpoint}");
         }
-
+        protected async override Task OnAfterRenderAsync(bool firstRender)
+        {
+            await Js.InvokeVoidAsync("AddDataTable", "#vehicle-Table");
+        }
         async Task Delete(int id)
         {
             var vehicle = lst.First(x => x.Id == id);
@@ -31,9 +34,11 @@ namespace CarRentalManagement.Client.Pages.Vehicles
                 await OnInitializedAsync();
             }
         }
+
         public void Dispose()
         {
             _interceptor.DisposeEvent();
+            Js.InvokeVoidAsync("DataTablesDispose", "#vehicle-Table");
         }
     }
 }

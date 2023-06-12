@@ -5,6 +5,13 @@
     <ValidationSummary />
 
     <fieldset disabled="@Disable">
+        <div class="form-group">
+            <label>Image (Optional) :</label>
+            <div>
+                <InputFile OnChange="HandleFileSelection" />
+                <p class="text-danger">@uploadWarnings</p>
+            </div>
+            </div>
         <div class="row">
             <div class="col-md-6">
                 <label class="col-md-3">Make:</label>
@@ -98,11 +105,25 @@
     private IList<Make> Makes;
     private IList<Model> Model;
     private IList<Color> Color;
+    string uploadWarnings;
+
 
     protected async override Task OnInitializedAsync()
     {
         Makes = await _client.GetFromJsonAsync<List<Make>>($"{Endpoints.MakesEndpoint}");
         Model = await _client.GetFromJsonAsync<List<Model>>($"{Endpoints.ModelEndpoint}");
         Color = await _client.GetFromJsonAsync<List<Color>>($"{Endpoints.ColorEndpoint}");
+    }
+    private async void HandleFileSelection(InputFileChangeEventArgs e)
+    {
+        var file = e.File;
+        if(file != null)
+        {
+            var ext = System.IO.Path.GetExtension(file.Name);
+            var picId = Guid.NewGuid().ToString().Replace("-", "");
+            vehicle.ImageName = $"{picId}{ext}";
+            vehicle.Image = new byte[file.Size];
+            await file.OpenReadStream().ReadAsync(vehicle.Image);
+        }
     }
 }

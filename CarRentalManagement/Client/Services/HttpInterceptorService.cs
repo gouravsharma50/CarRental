@@ -33,7 +33,7 @@ namespace CarRentalManagement.Client.Services
                     default:
                         break;
                 }
-                throw new Exception(message);
+                throw new HttpRequestException(message);
             }
         }
 

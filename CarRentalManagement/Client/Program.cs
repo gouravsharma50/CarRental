@@ -13,8 +13,7 @@ builder.Services.AddHttpClient("CarRentalManagement.ServerAPI", (sp, client) =>
 {
     client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress);
     client.EnableIntercept(sp);
-})
-    .AddHttpMessageHandler<BaseAddressAuthorizationMessageHandler>();
+}).AddHttpMessageHandler<BaseAddressAuthorizationMessageHandler>();
 
 // Supply HttpClient instances that include access tokens when making requests to the server project
 builder.Services.AddScoped(sp => sp.GetRequiredService<IHttpClientFactory>().CreateClient("CarRentalManagement.ServerAPI"));

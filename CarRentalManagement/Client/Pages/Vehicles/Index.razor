@@ -9,9 +9,10 @@
 }
 else
 {
-    <table class="table table-responsive-sm">
+    <table class="table table-responsive-sm" id="vehicle-Table">
         <thead>
             <tr>
+                <th></th>
                 <th>Modal</th>
                 <th>Make</th>
                 <th>Colour</th>
@@ -23,6 +24,7 @@ else
             @foreach (var item in lst)
             {
                 <tr>
+                    <th><img scr="@item.ImageName" width="150" height="150" /></th>
                     <td>@item.Model.Name</td>
                     <td>@item.Make.Name</td>
                     <td>@item.Color.Name</td>

@@ -1,7 +1,9 @@
 ﻿@page "/vehicles/create/"
+@using CarRentalManagement.Client.Services;
 
 @inject HttpClient _client
 @inject NavigationManager _navManage
+@inject HttpInterceptorService _interceptor;
 
 <h3 class="cart-title">Car Vehicles Create</h3>
 <hr />
@@ -13,6 +15,7 @@
 
     private async Task CreateVechicle()
     {
+        _interceptor.MonitorEvent();
         await _client.PostAsJsonAsync(Endpoints.VehiclesEndpoint, vehicle);
         _navManage.NavigateTo("/vehicles/");
     }
